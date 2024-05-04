@@ -27,8 +27,6 @@ async def login(username: str = Form(...), password: str = Form(...)):
         token = keycloak_openid.token(grant_type=["password"],
                                       username=username,
                                       password=password)
-        global user_token
-        user_token = token
         LOGGER.info("{username} got logged in")
         chech_for_role_test(token)
         return token
