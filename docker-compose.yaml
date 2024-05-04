@@ -2,7 +2,7 @@ version: '3.9'
 # Секция, где перечислены все сервисы, с которые относятся к системе
 services:
   payment_service:
-    build: ./payment_service
+    build: .\payment_service
     ports:
       - 5000:5000
     depends_on:
@@ -21,7 +21,7 @@ services:
   
   appointment_service:
   # Путь до Dockerfile сервиса
-    build: ./appointment_service
+    build: .\appointment_service
   # Даём доступ к 80 порту внутри контейнера через 8000 на машине
     ports:
     - 8000:80

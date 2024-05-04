@@ -2,7 +2,6 @@ from fastapi import APIRouter, status, HTTPException, Form, Header
 from uuid import UUID
 import requests
 import logging
-import sys
 from keycloak import KeycloakOpenID
 
 from app.check_info import paycheck_body,payment_info
@@ -27,8 +26,9 @@ async def login(username: str = Form(...), password: str = Form(...)):
         token = keycloak_openid.token(grant_type=["password"],
                                       username=username,
                                       password=password)
+        global user_token
+        user_token = token
         LOGGER.info("{username} got logged in")
-        chech_for_role_test(token)
         return token
     except Exception as e:
         print(e)
@@ -40,7 +40,6 @@ def chech_for_role_test(token):
         token_info = keycloak_openid.introspect(token)
         if "test" not in token_info["realm_access"]["roles"]:
             raise HTTPException(status_code=403, detail="Access denied")
-        print("token info: {}".format(token_info), file=sys.stderr) 
         return token_info
     except Exception as e:
         raise HTTPException(status_code=401, detail="Invalid token or access denied")
