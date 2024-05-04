@@ -1,0 +1,81 @@
+version: '3.9'
+# Секция, где перечислены все сервисы, с которые относятся к системе
+services:
+  payment_service:
+    build: ./payment_service
+    ports:
+      - 5000:5000
+    depends_on:
+      - elasticsearch
+    volumes:
+      - ./fastapi-logs:/code/logs
+  
+  elasticsearch:
+    image: elasticsearch:7.12.1
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+
+  
+  appointment_service:
+  # Путь до Dockerfile сервиса
+    build: ./appointment_service
+  # Даём доступ к 80 порту внутри контейнера через 8000 на машине
+    ports:
+    - 8000:80
+  # Передаём переменные окружения, которые будут использованы приложением
+    environment:
+      - POSTGRES_URL=postgresql://postgres:password@db:5432/db
+  # Перед запуском этого сервиса ждём пока запустится БД
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: "postgres"
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    command: ["postgres", "-c", "log_statement=all"]
+    healthcheck:
+        test: [ "CMD-SHELL", "pg_isready -d db -U postgres" ]
+
+  keycloak:
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+    image: quay.io/keycloak/keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/realm-export.json"
+      - "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+      - start-dev
+
+volumes:
+  prometheus_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./prometheus_data
+  grafana_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./grafana_data
+
+networks:
+  default: 
+    name: hello_fastapi

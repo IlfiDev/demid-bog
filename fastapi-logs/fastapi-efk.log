@@ -1,0 +1,28 @@
+2024-05-04 15:50:42,698 - __main__ - INFO - --- start up App ---
+2024-05-04 15:54:46,507 - app.payment_router - INFO - {username} got logged in
+2024-05-04 15:58:45,163 - __main__ - INFO - --- start up App ---
+2024-05-04 15:59:03,587 - app.payment_router - INFO - {e}
+2024-05-04 15:59:21,514 - app.payment_router - INFO - {e}
+2024-05-04 15:59:38,738 - app.payment_router - INFO - {e}
+2024-05-04 15:59:53,080 - app.payment_router - INFO - {e}
+2024-05-04 16:00:30,428 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:04:21,910 - __main__ - INFO - --- start up App ---
+2024-05-04 16:05:58,535 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:05:58,536 - app.payment_router - INFO - {e}
+2024-05-04 16:06:01,458 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:06:01,458 - app.payment_router - INFO - {e}
+2024-05-04 16:06:30,501 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:06:30,502 - app.payment_router - INFO - {e}
+2024-05-04 16:06:33,238 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:06:33,239 - app.payment_router - INFO - {e}
+2024-05-04 16:06:34,673 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:06:34,674 - app.payment_router - INFO - {e}
+2024-05-04 16:06:59,921 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:06:59,921 - app.payment_router - INFO - {e}
+2024-05-04 16:07:33,466 - __main__ - INFO - --- start up App ---
+2024-05-04 16:09:40,740 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:09:40,785 - app.payment_router - INFO - {e}
+2024-05-04 16:09:43,666 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:09:43,678 - app.payment_router - INFO - {e}
+2024-05-04 16:10:15,653 - app.payment_router - INFO - {username} got logged in
+2024-05-04 16:10:15,664 - app.payment_router - INFO - {e}
